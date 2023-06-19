@@ -1,0 +1,32 @@
+[
+  {
+    "group": "Desktop",
+    "name": "CPU",
+    "value": "RANDOM"
+  },
+  {
+    "group": "Desktop",
+    "name": "Memory",
+    "value": "RANDOM"
+  },
+  {
+    "group": "Laptop",
+    "name": "CPU",
+    "value": "RANDOM"
+  },
+  {
+    "group": "Laptop",
+    "name": "Memory",
+    "value": "RANDOM"
+  },
+  {
+    "group": "Phone",
+    "name": "CPU",
+    "value": "RANDOM"
+  },
+  {
+    "group": "Phone",
+    "name": "Memory",
+    "value": "RANDOM"
+  }
+]
