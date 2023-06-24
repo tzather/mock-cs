@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -17,7 +19,15 @@ app.Map("{*path}", (HttpRequest httpRequest, HttpResponse httpResponse, string p
   }
 
   var file = $"Files/{path}{method}.{fileType}";
-  return (File.Exists(file)) ? File.ReadAllText(file) : "Not Found";
+  var content = (File.Exists(file)) ? File.ReadAllText(file) : "Not Found";
+
+  // replace the word "RANDOM" with random integer
+  var regex = new Regex("RANDOM");
+  while (content.Contains("RANDOM"))
+  {
+    content = regex.Replace(content, new Random().Next(100).ToString(), 1);
+  }
+  return content;
 });
 
 app.Run();
