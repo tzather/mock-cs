@@ -5,6 +5,11 @@ var app = builder.Build();
 
 app.Map("{*path}", (HttpRequest httpRequest, HttpResponse httpResponse, string path) =>
 {
+  httpResponse.Headers.Add("Access-Control-Allow-Origin", "*");
+  httpResponse.Headers.Add("Access-Control-Request-Method", "*");
+  httpResponse.Headers.Add("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
+  httpResponse.Headers.Add("Access-Control-Allow-Headers", "*");
+
   var method = httpRequest.Method.ToLower() == "get" ? "" : $".{httpRequest.Method.ToLower()}";
   var fileType = "";
   if (httpRequest.ContentType?.ToLower() == "text/csv")
