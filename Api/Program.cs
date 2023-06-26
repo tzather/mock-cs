@@ -3,6 +3,8 @@ using System.Text.RegularExpressions;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+app.Map("", () => "Api is running");
+
 app.Map("{*path}", (HttpRequest httpRequest, HttpResponse httpResponse, string path) =>
 {
   httpResponse.Headers.Add("Access-Control-Allow-Origin", "*");
