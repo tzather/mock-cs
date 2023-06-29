@@ -1,6 +1,7 @@
 # variables
-# baseUrl=http://localhost:5198
-baseUrl=http://tzather-test-mock-cs.azurewebsites.net
+# baseUrl=http://localhost:4250
+baseUrl=http://localhost:5101
+# baseUrl=http://tzather-test-mock-cs.azurewebsites.net
 
 # create output folder
 mkdir -p output
