@@ -7,7 +7,7 @@ baseUrl=http://localhost:5101
 mkdir -p output
 
 # login
-curl --silent --request POST "$baseUrl/identity/login" >output/login.json
+curl --silent --request POST "$baseUrl/identity/login" | jq . >output/login.json
 
 # json
 curl --silent --request GET "$baseUrl/dashboard/barchart" | jq . >output/barchart.json

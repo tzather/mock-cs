@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +29,14 @@ app.Map("{*path}", (HttpRequest httpRequest, HttpResponse httpResponse, string p
 
   var file = $"Files/{path}{method}.{fileType}";
   var content = (File.Exists(file)) ? File.ReadAllText(file) : "Not Found";
+  // return login token as base64 encoded
+  if (path.Equals("identity/login", StringComparison.InvariantCultureIgnoreCase))
+  {
+    var jsonObject = JsonSerializer.Deserialize<LoginToken>(content);
+    var header = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(jsonObject?.header)));
+    var payload = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonSerializer.Serialize(jsonObject?.payload)));
+    content = JsonSerializer.Serialize(new { IdentityToken = $"{header}.{payload}.{jsonObject?.signature}" });
+  }
 
   // replace the word "RANDOM" with random integer
   var regex = new Regex("RANDOM");
@@ -38,3 +48,5 @@ app.Map("{*path}", (HttpRequest httpRequest, HttpResponse httpResponse, string p
 });
 
 app.Run();
+
+
